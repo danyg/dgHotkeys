@@ -14,7 +14,7 @@ checkVolume() {
 		diff := abs(diff)
 
 		; log("Reading J " . JOY_SETTINGS.JOYSTICK . " JoyData.U: " . JoyData.U . " Volume:" . Volume . " LastValue: " . LastValue)
-		if (diff > 2) {
+		if (diff > 2 && Volume > 0) {
 			SoundSet, Volume
 			LastValue := Volume
 			showOSD("New Volume " . Volume . "%")
@@ -23,5 +23,3 @@ checkVolume() {
 }
 checkVolumeBind := Func("checkVolume").Bind()
 SetTimer, %checkVolumeBind%, 100
-
-

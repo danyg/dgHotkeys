@@ -33,7 +33,6 @@ volDown(){
 	return
 }
 
-Menu, Tray, Add
 addTrayLabelItem("Multimedia")
 addHotkey("^#Z",    "`u23EA Previous Track", Func("prev").bind())
 addHotkey("^#X",    "`u23EF Play/Pause", Func("playpause").bind())

@@ -1,6 +1,6 @@
 JOY_SETTINGS := {JOYSTICK: 1}
 
-JOY_SETTINGS := JSON_load("joySettings.json")
+JOY_SETTINGS := JSON_load("config\\joySettings.json")
 
 toggleJoystick() {
 	global JOY_SETTINGS
@@ -26,7 +26,7 @@ setWatchedJoystick(WatchedJoystick) {
 	global JOY_SETTINGS
 
 	JOY_SETTINGS.JOYSTICK := WatchedJoystick
-	JSON_save(JOY_SETTINGS, "joySettings.json")
+	JSON_save(JOY_SETTINGS, "config\\joySettings.json")
 
 	if(JOY_SETTINGS.JOYSTICK = 0) {
 		showOSD("Not Listening for Joystick")
@@ -35,5 +35,6 @@ setWatchedJoystick(WatchedJoystick) {
 	}
 }
 
+addTrayLabelItem("Joystick")
 addHotkey("^#N",    "`u21ea Toggle Watched Joystick", Func("toggleJoystick").bind())
 addHotkey("^#+N",   "`u21ea Turn off Watched Joystick", Func("turnOffJoystick").bind())

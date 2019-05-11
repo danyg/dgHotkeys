@@ -140,7 +140,7 @@ changeTransparency(delta){
 	; log("Storing Transparency for " . WindowClass . " ==> " . Trans0)
 	; TransByWinClass.PX_WINDOW_CLASS := Trans0
 	TransByWinClass[WindowClass] := Trans0
-	JSON_save(TransByWinClass, "opacity.json")
+	JSON_save(TransByWinClass, "config\\opacity.json")
 
 	showTransparency()
 }
@@ -162,15 +162,15 @@ saveWindowClassDimensionsAndPosition() {
 
 	DimPosByWinClass[WindowClass] := {X: wX, Y: wY, W: wW, H: wH}
 
-	JSON_save(DimPosByWinClass, "dimPos.json")
+	JSON_save(DimPosByWinClass, "config\\dimPos.json")
 	showOSD("Dimensions and Position Saved")
 }
 
 listenNewWindows() {
 	global TransByWinClass
 	global DimPosByWinClass
-	TransByWinClass := JSON_load("opacity.json")
-	DimPosByWinClass := JSON_load("dimPos.json")
+	TransByWinClass := JSON_load("config\\opacity.json")
+	DimPosByWinClass := JSON_load("config\\dimPos.json")
 
 	DetectHiddenWindows, On
 	Hwnd := WinExist(A_ScriptFullPath)
@@ -212,7 +212,7 @@ forgetDimensionsAndPositionForCurrentWindow() {
 
 	if(DimPosByWinClass[WindowClass]) {
 		DimPosByWinClass.Delete(WindowClass)
-		JSON_save(DimPosByWinClass, "dimPos.json")
+		JSON_save(DimPosByWinClass, "config\\dimPos.json")
 		showOSD("Dimensions and Position Forgotten")
 	}
 }
@@ -231,7 +231,6 @@ onShellMessage( wParam, winID ) {
 
 listenNewWindows()
 
-Menu, Tray, Add
 addTrayLabelItem("Active Window Control")
 
 addHotkey("^#T",       	"`u21ea Toggle Always on Top", Func("toggleAlwaysOnTop").bind(), false)

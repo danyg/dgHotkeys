@@ -61,7 +61,15 @@ updateED() {
 	updateEDOSD(time . "\n" . date . " " . year, MyStr)
 }
 
-; EDFont := New CustomFont("res:EUROCAPS.TTF", "eurocaps", 12)
+Try
+{
+	EDFont := New CustomFont("EuroCAPS.TTF", "eurocaps", 12)
+}
+Catch e
+{
+	log("Error loading EuroCAPS.TTF: " . e)
+}
+
 TimeEDText =
 ExtraEDText =
 edOSDCreated:=false
@@ -70,7 +78,7 @@ showEDOSD(TextOfOSD){
 	global TimeEDText
 	global ExtraEDText
 	global edDbgMode
-	; global EDFont
+	global EDFont
 
 	; Top := 20
 	; Left := 1440
@@ -136,10 +144,8 @@ hideEDOSD(){
 
 }
 
+; toggleEDMode()
 
-Menu, Tray, Add
 addTrayLabelItem("Others")
 addHotkey("^#E", "`uD83D`uDD52 Toggle Elite Dangerous Mode", Func("toggleEDMode").bind(), false)
 addHotkey("^#W", "`uD83D`uDD52 Toggle Elite Dangerous DEBUG Mode", Func("toggleEDDebugMode").bind(), false)
-
-; toggleEDMode()

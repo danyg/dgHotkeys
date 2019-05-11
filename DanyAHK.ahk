@@ -8,22 +8,24 @@ SetTitleMatchMode 2
 
 Menu, Tray, NoStandard ; remove standard Menu items
 
-#include JSONLib.ahk
-#include Class_CustomFont.ahk
+#include libs\JSONLib.ahk
+#include libs\Class_CustomFont.ahk
+#Include libs\utils.ahk
 
-#include readJoystick.ahk
-#Include utils.ahk
-#Include OSD.ahk
+#Include services\OSD.ahk
+#include services\readJoystick.ahk
+#Include services\VolumeJoystick.ahk
 
-#Include multimedia.ahk
-
-#Include windowOperations.ahk
-
-#Include clock.ahk
-
-#Include joystickSettings.ahk
-#Include eliteDangerous.ahk
-#Include VolumeJoystick.ahk
+#Include modules\multimedia.ahk
+Menu, Tray, Add
+#Include modules\windowOperations.ahk
+Menu, Tray, Add
+#Include modules\clock.ahk
+Menu, Tray, Add
+#Include modules\eliteDangerous.ahk
+Menu, Tray, Add
+#Include modules\joystickSettings.ahk
+Menu, Tray, Add
 
 Menu, Tray, Add , E&xit, ExitButton
 

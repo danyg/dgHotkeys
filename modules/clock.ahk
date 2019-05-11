@@ -43,7 +43,7 @@ readClockSettings() {
 	global CLOCK_SETTINGS
 	global CLOCK_LEFT
 
-	CLOCK_SETTINGS := JSON_load("clock.json")
+	CLOCK_SETTINGS := JSON_load("config\\clock.json")
 	if(CLOCK_SETTINGS.HasKey("clockLeft")) {
 		CLOCK_LEFT := CLOCK_SETTINGS.clockLeft
 	}
@@ -55,7 +55,7 @@ saveClockSettings() {
 
 	CLOCK_SETTINGS.clockLeft := CLOCK_LEFT
 
-	JSON_save(CLOCK_SETTINGS, "clock.json")
+	JSON_save(CLOCK_SETTINGS, "config\\clock.json")
 }
 
 showHideClock() {
@@ -222,14 +222,13 @@ showTime() {
 	return
 }
 
-Menu, Tray, Add
-addTrayLabelItem("Others")
-addHotkey("^#H",    "`uD83D`uDD52 Toggle Thin Clock", Func("showHideClock").bind(), false)
-addHotkey("^+#H",    "`uD83D`uDD52 Toggle Thin Clock Config", Func("toggleClockConfigMode").bind(), false)
-addHotkey("^#J", "`uD83D`uDD52 Show Time", Func("showTime").bind(), false)
-
 readClockSettings()
 
 if(!CLOCK_SETTINGS.HasKey("showOnStart") || CLOCK_SETTINGS.showOnStart = true) {
 	createClock()
 }
+
+addTrayLabelItem("Others")
+addHotkey("^#H",    "`uD83D`uDD52 Toggle Thin Clock", Func("showHideClock").bind(), false)
+addHotkey("^+#H",    "`uD83D`uDD52 Toggle Thin Clock Config", Func("toggleClockConfigMode").bind(), false)
+addHotkey("^#J", "`uD83D`uDD52 Show Time", Func("showTime").bind(), false)

@@ -105,9 +105,7 @@ getLogFile() {
 	static a
 	a += 1
 	if(a = 1){
-		; FileOpen("log2.log", "w", "UTF-8").Write("----[ LOG FILE INIT " . a . " ] -------------------------")
 		logFile := FileOpen("log.log", "a", "UTF-8")
-		; FormatTime, MyTime,, dd/mm/ yyyy HH:mm:ss
 		FormatTime, MyTime, , yyyy-MM-dd HH:mm:ss
 		logFile.Write("\r\n════[ " . MyTime . " ]═════════════════════════════════════════════════════")
 	}
