@@ -1,23 +1,24 @@
 checkVolume() {
 	global JOY_SETTINGS
-
-	static LastValue = 0
-	if(JOY_SETTINGS.JOYSTICK = 0){
+	if(JOY_SETTINGS.JOYSTICK = 0) {
 		Return
 	}
 
-	JoyData := getJoystickData( JOY_SETTINGS.JOYSTICK )
-	Volume := JoyData.U * 1
-	diff := Volume - LastValue
-	diff := abs(diff)
+	static LastValue = 0
 
-	if (diff > 2) {
+	JoyData := getJoystickData( JOY_SETTINGS.JOYSTICK )
+	if(JoyData.on)
+	{
+		Volume := JoyData.U * 1
+		diff := Volume - LastValue
+		diff := abs(diff)
 
 		; log("Reading J " . JOY_SETTINGS.JOYSTICK . " JoyData.U: " . JoyData.U . " Volume:" . Volume . " LastValue: " . LastValue)
-
-		SoundSet, Volume
-		LastValue := Volume
-		showOSD("New Volume " . Volume . "%")
+		if (diff > 2) {
+			SoundSet, Volume
+			LastValue := Volume
+			showOSD("New Volume " . Volume . "%")
+		}
 	}
 }
 checkVolumeBind := Func("checkVolume").Bind()

@@ -1,13 +1,25 @@
 SetFormat, float, 03  ; Omit decimal point from axis position percentages.
 
+populateAxis(Axis, JoyData) {
+	GetKeyState, joyAxisData, %JoystickNumber%Joy%Axis%
+	JoyData[Axis] := joyAxisData
+	if(JoyData[Axis] != "")
+	{
+		JoyData.on := true
+	}
+}
+
 getJoystickData(JoystickNumber) {
+	JoyData := {on: false, name: "", info: "", buttonsRaw: "", X: -1, Y: -1, Z: -1, R: -1, U: -1, V: -1, POV: -1, buttons: [] }
+	if(JoystickNumber = 0){
+		Return JoyData
+	}
 
     ; log("reading Joystick " + JoystickNumber )
 
 	GetKeyState, joy_buttons, %JoystickNumber%JoyButtons
 	GetKeyState, joy_name, %JoystickNumber%JoyName
 	GetKeyState, joy_info, %JoystickNumber%JoyInfo
-    JoyData := {name: "", info: "", buttonsRaw: "", X: -1, Y: -1, Z: -1, R: -1, U: -1, V: -1, P: -1, buttons: [] }
 
     JoyData.name := joy_name
     JoyData.info := joy_info
@@ -18,53 +30,40 @@ getJoystickData(JoystickNumber) {
     {
         GetKeyState, joy%a_index%, %JoystickNumber%joy%a_index%
         if joy%a_index% = D
+		{
             JoyData.buttons.Push(a_index)
+			JoyData.on := true
+		}
     }
-    GetKeyState, joyx, %JoystickNumber%JoyX
-	JoyData.X := joyx
-    axis_info = X%joyx%
-
-    GetKeyState, joyy, %JoystickNumber%JoyY
-	JoyData.Y := joyy
-    axis_info = %axis_info%%a_space%%a_space%Y%joyy%
+	populateAxis("X", JoyData)
+	populateAxis("Y", JoyData)
 
     IfInString, joy_info, Z
     {
-	    GetKeyState, joyz, %JoystickNumber%JoyZ
-	    JoyData.Z := joyz
-        axis_info = %axis_info%%a_space%%a_space%Z%joyz%
+	    populateAxis("Z", JoyData)
     }
 
     IfInString, joy_info, R
     {
-	    GetKeyState, joyr, %JoystickNumber%JoyR
-	    JoyData.R := joyr
-        axis_info = %axis_info%%a_space%%a_space%R%joyr%
+	    populateAxis("R", JoyData)
     }
 
     IfInString, joy_info, U
     {
-        GetKeyState, joyu, %JoystickNumber%JoyU
-        JoyData.U := joyu
-        axis_info = %axis_info%%a_space%%a_space%U%joyu%
+        populateAxis("U", JoyData)
     }
 
     IfInString, joy_info, V
     {
-        GetKeyState, joyv, %JoystickNumber%JoyV
-        JoyData.V := joyv
-        axis_info = %axis_info%%a_space%%a_space%V%joyv%
+        populateAxis("V", JoyData)
     }
 
     IfInString, joy_info, P
     {
-        GetKeyState, joyp, %JoystickNumber%JoyPOV
-        JoyData.P := joyp
-        axis_info = %axis_info%%a_space%%a_space%POV%joyp%
+        populateAxis("POV", JoyData)
     }
-
 
     ; log( JSON_to(JoyData, 4, "   ") )
 
-    return JoyData
+  	Return JoyData
 }

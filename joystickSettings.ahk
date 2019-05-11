@@ -4,24 +4,36 @@ JOY_SETTINGS := JSON_load("joySettings.json")
 
 toggleJoystick() {
 	global JOY_SETTINGS
+	WatchedJoystick := JOY_SETTINGS.JOYSTICK
 
 	if(!JOY_SETTINGS.JOYSTICK) {
-		JOY_SETTINGS.JOYSTICK := 0
+		WatchedJoystick := 0
 	}
-	JOY_SETTINGS.JOYSTICK++
+	WatchedJoystick++
 
-	if( JOY_SETTINGS.JOYSTICK = 4) {
-		JOY_SETTINGS.JOYSTICK := 0
+	if( WatchedJoystick = 5) {
+		WatchedJoystick := 0
 	}
+
+	setWatchedJoystick(WatchedJoystick)
+}
+
+turnOffJoystick() {
+	setWatchedJoystick(0)
+}
+
+setWatchedJoystick(WatchedJoystick) {
+	global JOY_SETTINGS
+
+	JOY_SETTINGS.JOYSTICK := WatchedJoystick
+	JSON_save(JOY_SETTINGS, "joySettings.json")
 
 	if(JOY_SETTINGS.JOYSTICK = 0) {
 		showOSD("Not Listening for Joystick")
 	} else {
 		showOSD("Watching Joystick " + JOY_SETTINGS.JOYSTICK)
 	}
-
-	JSON_save(JOY_SETTINGS, "joySettings.json")
-
 }
 
 addHotkey("^#N",    "`u21ea Toggle Watched Joystick", Func("toggleJoystick").bind())
+addHotkey("^#+N",   "`u21ea Turn off Watched Joystick", Func("turnOffJoystick").bind())
