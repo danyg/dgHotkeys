@@ -7,13 +7,8 @@ JavaEscapedToUnicode(s) {
     return e . SubStr(s, i)
 }
 
-addTrayLabelItemWRONG(str){
-	; Menu, Tray, Add, %str% , StupidLabel
-	; Menu, Tray, Disable,  %str%
-}
-
 addTrayLabelItem(str){
-	Menu, Tray, Add, %str% , StupidLabel
+	Menu, Tray, Add, %str% , LabelForMenuTrayLabels
 	Menu, Tray, Disable,  %str%
 }
 

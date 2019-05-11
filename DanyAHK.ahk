@@ -6,7 +6,6 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 SetTitleMatchMode 2
 ; #WinActivateForce
 
-
 Menu, Tray, NoStandard ; remove standard Menu items
 
 #include JSONLib.ahk
@@ -26,12 +25,10 @@ Menu, Tray, NoStandard ; remove standard Menu items
 #Include eliteDangerous.ahk
 #Include VolumeJoystick.ahk
 
-Menu, Tray, Add , E&xit, ButtonExit ;add a item named Exit that goes to the ButtonExit label
+Menu, Tray, Add , E&xit, ExitButton
 
-; The following abominable pure shit is in this way because of this:
-; https://autohotkey.com/boards/viewtopic.php?f=14&t=18895
-	StupidLabel:
-	Return
+LabelForMenuTrayLabels:
+Return
 
-	ButtonExit:
-	ExitApp
+ExitButton:
+ExitApp
