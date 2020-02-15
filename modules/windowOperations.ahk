@@ -175,7 +175,7 @@ listenNewWindows() {
 	DetectHiddenWindows, On
 	Hwnd := WinExist(A_ScriptFullPath)
 	DllCall( "RegisterShellHookWindow", UInt,Hwnd )
-	MsgNum := DllCall( "RegisterWindowMessage", Str,"SHELLHOOK" )
+	MsgNum := DllCall( "RegisterWindowMessage", Str, "SHELLHOOK" )
 	OnMessage( MsgNum, "onShellMessage" )
 }
 

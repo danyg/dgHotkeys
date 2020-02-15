@@ -171,6 +171,8 @@ clockConfigModeOff() {
 
 	removeTemporalHotKey("^!LEFT")
 	removeTemporalHotKey("^!RIGHT")
+	removeTemporalHotKey("^+!LEFT")
+	removeTemporalHotKey("^+!RIGHT")
 
 	showOSD("Clock Config Mode Off")
 
