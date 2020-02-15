@@ -1,47 +1,29 @@
 ; Copy
-!c::
-Send ^c
-return
+!c::Send ^c
 
 ; Paste
-!v::
-Send ^v
-return
+!v::Send ^v
 
 ; Cut
-!x::
-Send ^x
-return
+!x::Send ^x
 
 ; Select All
-!a::
-Send ^a
-return
+!a::Send ^a
 
 ; Save
-!s::
-Send ^s
-return
+!s::Send ^s
 
 ; Undo
-!z::
-Send ^z
-return
+!z::Send ^z
 
 ; Redo
-!+z::
-Send ^y
-return
+!+z::Send ^y
 
 ; Search
-!f::
-Send ^f
-return
+!f::Send ^f
 
 ; Close Window
-!q::
-Send !{F4}
-return
+!q::Send !{F4}
 
 ; New window
 !n::Send ^n
@@ -49,10 +31,14 @@ return
 ; New Tab
 !t::Send ^t
 
+; Reopen Tab
+!+t::Send ^+t
+
 ; Text Editing Shortcuts
 
-;following section remaps alt-arrow and command-arrow
-;keys to mimic OSX behaviour
+; following section remaps alt-arrow and command-arrow
+; keys to mimic OSX behaviour
+
 !Up::Send {Lctrl down}{Home}{Lctrl up}
 !Down::Send {Lctrl down}{End}{Lctrl up}
 !Left::Send {Home}

@@ -15,7 +15,6 @@ Menu, Tray, NoStandard ; remove standard Menu items
 #Include services\OSD.ahk
 #include services\readJoystick.ahk
 #Include services\VolumeJoystick.ahk
-#Include services\shortcutsLikeMac.ahk
 
 #Include modules\multimedia.ahk
 Menu, Tray, Add
@@ -29,6 +28,8 @@ Menu, Tray, Add
 Menu, Tray, Add
 
 Menu, Tray, Add , E&xit, ExitButton
+
+#Include services\shortcutsLikeMac.ahk
 
 LabelForMenuTrayLabels:
 Return
