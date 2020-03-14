@@ -1,3 +1,7 @@
+; clipboard_copy() {
+; 	Send ^c
+; }
+
 ; Copy
 !c::Send ^c
 
@@ -56,5 +60,5 @@
 #+Down::Send {Shift down}{PgDn}
 #+Left::Send {Shift down}{Lctrl down}{Left}{Lctrl up}{Shift up}
 #+Right::Send {Shift down}{Lctrl down}{Right}{Lctrl up}{Shift up}
-#BS::Send ^BS
+#BS::Send ^{BS}
 Alt & Del::Send ^{Del}
