@@ -146,6 +146,6 @@ hideEDOSD(){
 
 ; toggleEDMode()
 
-addTrayLabelItem("Others")
+addTrayLabelItem("Elite Dangerous")
 addHotkey("^#E", "`uD83D`uDD52 Toggle Elite Dangerous Mode", Func("toggleEDMode").bind(), false)
 addHotkey("^#W", "`uD83D`uDD52 Toggle Elite Dangerous DEBUG Mode", Func("toggleEDDebugMode").bind(), false)

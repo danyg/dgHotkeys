@@ -199,5 +199,6 @@ toggleMacKeys() {
 }
 
 ; Start module
+addTrayLabelItem("Mac shortcuts")
 addHotkey("#Esc", "Toggle Mac HotKeys", Func("toggleMacKeys").bind(), false)
 defineMacHotKeys()

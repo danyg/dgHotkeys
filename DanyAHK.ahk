@@ -26,10 +26,11 @@ Menu, Tray, Add
 Menu, Tray, Add
 #Include modules\joystickSettings.ahk
 Menu, Tray, Add
+#Include services\shortcutsLikeMac.ahk
+Menu, Tray, Add
 
 Menu, Tray, Add , E&xit, ExitButton
 
-#Include services\shortcutsLikeMac.ahk
 
 LabelForMenuTrayLabels:
 Return

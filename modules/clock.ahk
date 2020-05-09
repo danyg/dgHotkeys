@@ -230,7 +230,7 @@ if(!CLOCK_SETTINGS.HasKey("showOnStart") || CLOCK_SETTINGS.showOnStart = true) {
 	createClock()
 }
 
-addTrayLabelItem("Others")
+addTrayLabelItem("Mini Clock")
 addHotkey("^#H",    "`uD83D`uDD52 Toggle Thin Clock", Func("showHideClock").bind(), false)
 addHotkey("^+#H",    "`uD83D`uDD52 Toggle Thin Clock Config", Func("toggleClockConfigMode").bind(), false)
 addHotkey("^#J", "`uD83D`uDD52 Show Time", Func("showTime").bind(), false)
