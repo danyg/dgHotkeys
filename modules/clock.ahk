@@ -123,6 +123,13 @@ toggleClockConfigMode() {
 	}
 }
 
+clockConfigDefineKeys() {
+	addTemporalHotKey("^!LEFT",    "Move Clock Left", Func("moveClockLeft").bind(), false)
+	addTemporalHotKey("^!RIGHT",   "Move Clock Right", Func("moveClockRight").bind(), false)
+	addTemporalHotKey("^+!LEFT",   "Move Clock Left (FAST)", Func("moveClockLeftFast").bind(), false)
+	addTemporalHotKey("^+!RIGHT",  "Move Clock Right (FAST)", Func("moveClockRightFast").bind(), false)
+}
+
 clockConfigModeOn() {
 	global CLOCK_CONFIG_MODE
 
@@ -131,11 +138,12 @@ clockConfigModeOn() {
 
 	legend := legend . "\nToggle Show Thin Clock on Start (" . getHumanKeyName("^#H") . ")"
 
-	legend := legend . "\n" . addTemporalHotKey("^!LEFT",    "Move Clock Left", Func("moveClockLeft").bind(), false)
-	legend := legend . "\n" . addTemporalHotKey("^!RIGHT",    "Move Clock Right", Func("moveClockRight").bind(), false)
-	legend := legend . "\n" . addTemporalHotKey("^+!LEFT",    "Move Clock Left (FAST)", Func("moveClockLeftFast").bind(), false)
-	legend := legend . "\n" . addTemporalHotKey("^+!RIGHT",    "Move Clock Right (FAST)", Func("moveClockRightFast").bind(), false)
+	legend := legend . "\n Move Clock Left"
+	legend := legend . "\n Move Clock Right"
+	legend := legend . "\n Move Clock Left (FAST)"
+	legend := legend . "\n Move Clock Right (FAST)"
 
+	enableClockConfigModeKeys()
 	showConfigInstructions(legend)
 
 	CLOCK_CONFIG_MODE:=true
@@ -150,7 +158,7 @@ showConfigInstructions(text) {
 	Y := 20
 	TextOfOSD := JavaEscapedToUnicode(text)
 
-log("Showing Tooltip at: " . X . " x " . Y . " OTHER STUFF: " . PMonRight . " | " . PMonLeft . " | " . PMon)
+	log("Showing Tooltip at: " . X . " x " . Y . " OTHER STUFF: " . PMonRight . " | " . PMonLeft . " | " . PMon)
 	CoordMode, ToolTip, Screen
 
 	ToolTip, %TextOfOSD%, %X%, %Y%
@@ -169,16 +177,27 @@ clockConfigModeOff() {
 
 	hideInstructions()
 
-	removeTemporalHotKey("^!LEFT")
-	removeTemporalHotKey("^!RIGHT")
-	removeTemporalHotKey("^+!LEFT")
-	removeTemporalHotKey("^+!RIGHT")
+	disableClockConfigModeKeys()
 
 	showOSD("Clock Config Mode Off")
 
 	saveClockSettings()
 
 	CLOCK_CONFIG_MODE:=false
+}
+
+enableClockConfigModeKeys() {
+	enableTemporalHotKey("^!LEFT")
+	enableTemporalHotKey("^!RIGHT")
+	enableTemporalHotKey("^+!LEFT")
+	enableTemporalHotKey("^+!RIGHT")
+}
+
+disableClockConfigModeKeys() {
+	disableTemporalHotKey("^!LEFT")
+	disableTemporalHotKey("^!RIGHT")
+	disableTemporalHotKey("^+!LEFT")
+	disableTemporalHotKey("^+!RIGHT")
 }
 
 _moveClockLeft(inc) {
@@ -225,6 +244,8 @@ showTime() {
 }
 
 readClockSettings()
+clockConfigDefineKeys()
+disableClockConfigModeKeys()
 
 if(!CLOCK_SETTINGS.HasKey("showOnStart") || CLOCK_SETTINGS.showOnStart = true) {
 	createClock()
