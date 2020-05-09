@@ -24,6 +24,8 @@ addHotkey(key, label, action, annouceLabel=true){
 	label := label . " (" . getHumanKeyName(key) . ")"
 
 	Menu, Tray, Add, %label% , %wrapper%
+
+	return key
 }
 
 removeHotKey(key, label) {
@@ -51,8 +53,34 @@ addTemporalHotKey(key, label, action, annouceLabel=true) {
 }
 
 removeTemporalHotKey(key) {
+	disableTemporalHotKey(key)
+}
+
+enableTemporalHotKey(key) {
+	Loop, parse, key, |
+		Hotkey, % "" A_LoopField, on
+}
+
+disableTemporalHotKey(key) {
 	Loop, parse, key, |
 		Hotkey, % "" A_LoopField, off
+}
+
+addRemovableHotKey(key, action) {
+	wrapper := Func("execHotkey").bind("", action, false)
+
+	Loop, parse, key, |
+		Hotkey, % "" A_LoopField, %wrapper%
+
+	return key
+}
+
+enableRemovableHotKey(key) {
+	enableTemporalHotKey(key)
+}
+
+disableRemovableHotKey(key) {
+	disableTemporalHotKey(key)
 }
 
 execHotkey(label, action, annouceLabel) {
