@@ -31,6 +31,8 @@ Menu, Tray, Add
 
 Menu, Tray, Add , E&xit, ExitButton
 
+#Include modules\hotCorners.ahk
+
 
 LabelForMenuTrayLabels:
 Return
