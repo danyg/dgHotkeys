@@ -37,33 +37,32 @@ class HotCorners {
 
 	checkHotCorners(mouseX, mouseY) {
 		mousePos := this.getCoord(mouseX, mouseY)
-		posWasKept := this.previousPos = mousePos
+		posWasKept := this.previousPos == mousePos
 
-		if (!this.triggering) {
+		if (!posWasKept) {
+			this.triggering := false
+		}
 
-			if (this.cornerTopLeft = mousePos AND posWasKept) {
+		if (!this.triggering) { ; AND posWasKept
+
+			if (this.cornerTopLeft = mousePos) {
 				this.triggering := true
 				this.triggerTopLeftCorner()
 			}
-			if (this.cornerTopRight = mousePos AND posWasKept) {
+			if (this.cornerTopRight = mousePos) {
 				this.triggering := true
 				this.triggerTopRightCorner()
 			}
 
-			if (this.cornerBottomRight = mousePos AND posWasKept) {
+			if (this.cornerBottomRight = mousePos) {
 				this.triggering := true
 				this.triggerBottomRightCorner()
 			}
 
-			if (this.cornerBottomLeft = mousePos AND posWasKept) {
+			if (this.cornerBottomLeft = mousePos) {
 				this.triggering := true
 				this.triggerBottomLeftCorner()
 			}
-
-		}
-
-		if (!posWasKept) {
-			this.triggering := false
 		}
 
 		this.previousPos := mousePos
@@ -76,13 +75,13 @@ class HotCorners {
 	triggerTopLeftCorner() {
 		log("TopLeftCorner")
 
-		Send {LWin down}{Tab down}{Tab up}{LWin up}
+		this.expose()
 	}
 
 	triggerTopRightCorner() {
 		log("TopRightCorner")
 
-		Send {LWin down}{Tab down}{Tab up}{LWin up}
+		this.expose()
 	}
 
 	triggerBottomRightCorner() {
@@ -91,6 +90,10 @@ class HotCorners {
 
 	triggerBottomLeftCorner() {
 		log("BottomLeftCorner")
+	}
+
+	expose() {
+		Send {LWin down}{Tab down}{Tab up}{LWin up}
 	}
 }
 
