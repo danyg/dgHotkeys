@@ -5,6 +5,7 @@ class HotCorners {
 		this.tickMethod := ObjBindMethod(this, "tick")
 		this.previousPos := this.getCoord(100,100)
 		this.triggering := false
+		this.actions := new CornerActions
 
 		this.start()
 	}
@@ -75,13 +76,13 @@ class HotCorners {
 	triggerTopLeftCorner() {
 		log("TopLeftCorner")
 
-		this.expose()
+		this.actions.do("ApplicationWindows")
 	}
 
 	triggerTopRightCorner() {
 		log("TopRightCorner")
 
-		this.expose()
+		this.actions.do("ApplicationWindows")
 	}
 
 	triggerBottomRightCorner() {
@@ -90,10 +91,62 @@ class HotCorners {
 
 	triggerBottomLeftCorner() {
 		log("BottomLeftCorner")
+
+		this.actions.do("StartScreenSaver")
+	}
+}
+
+class CornerActions {
+
+	do(action) {
+		switch action {
+			case "StartScreenSaver":	  return this.StartScreenSaver()
+			case "DisableScreenSaver":	return this.DisableScreenSaver()
+			case "MissionControl":	    return this.MissionControl()
+			case "ApplicationWindows":	return this.ApplicationWindows()
+			case "Desktop":	            return this.Desktop()
+			case "NotificationCenter":	return this.NotificationCenter()
+			case "LaunchPad":	          return this.LaunchPad()
+			case "PutDisplayToSleep":	  return this.PutDisplayToSleep()
+		}
 	}
 
-	expose() {
+	StartScreenSaver() {
+		RegRead, screenSaver, % "HKEY_CURRENT_USER\\Control Panel\\Desktop", % "SCRNSAVE.EXE"
+
+		if(!screenSaver) {
+			showOSD("Please configure a Screen Saver")
+		} else {
+			Run, % screenSaver . " /s"
+		}
+	}
+
+	DisableScreenSaver() {
+
+	}
+
+	MissionControl() {
+
+	}
+
+	ApplicationWindows() {
 		Send {LWin down}{Tab down}{Tab up}{LWin up}
+	}
+
+	Desktop() {
+
+	}
+
+	NotificationCenter() {
+
+	}
+
+	LaunchPad() {
+
+	}
+
+	PutDisplayToSleep() {
+
 	}
 }
 
