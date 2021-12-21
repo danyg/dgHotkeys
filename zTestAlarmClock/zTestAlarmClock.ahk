@@ -1,6 +1,6 @@
-#Include libs\utils.ahk
-#Include libs\JSONLib.ahk
-#Include services\OSD.ahk
+#Include ..\libs\utils.ahk
+#Include ..\libs\JSONLib.ahk
+#Include ..\services\OSD.ahk
 
 I_Icon = zTestAlarmClock.ico
 ICON [I_Icon]
@@ -8,6 +8,7 @@ Menu, Tray, NoStandard ; remove standard Menu items
 ; Menu, Tray, Icon, %I_Icon%, 0, 1 ; No needed when compiled to change tray icon
 
 config={}
+SetTitleMatchMode, 2
 VLCTitle := "VLC media player"
 watching := false
 
@@ -15,10 +16,14 @@ runVLC() {
 	global vlcPath
 	global playlistPath
 	global VLCTitle
+  global config
 
 	WinClose, %VLCTitle%
+  volume := "1.00"
+  if config.volume <> ""
+    volume := config.volume
 
-	flagsO := {shuffle: "--random", inLoop: "--loop", autoStart: "--playlist-autostart"}
+	flagsO := {shuffle: "--random", inLoop: "--loop", autoStart: "--playlist-autostart", noVolumeSave: "--no-volume-save", setVolume: "--mmdevice-volume=" . volume}
 	flags := ""
 
 	For key, value in flagsO
@@ -33,7 +38,7 @@ loadConfig() {
 	global config
 	global alarmTime
 	global vlcPath
-	global playlistPath
+  global playlistPath
 
 	config:=JSON_load("config\\alarm-clock.json")
 	alarmTime := config.alarmTime
