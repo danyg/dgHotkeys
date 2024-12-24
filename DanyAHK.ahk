@@ -17,15 +17,16 @@ Menu, Tray, NoStandard ; remove standard Menu items
 #include services\readJoystick.ahk
 #Include services\VolumeJoystick.ahk
 
+addTrayLabelItem("v24.10.11a")
 #Include modules\multimedia.ahk
 Menu, Tray, Add
 #Include modules\windowOperations.ahk
 Menu, Tray, Add
 #Include modules\clock.ahk
-Menu, Tray, Add
-#Include modules\eliteDangerous.ahk
-Menu, Tray, Add
-#Include modules\joystickSettings.ahk
+; Menu, Tray, Add
+; #Include modules\eliteDangerous.ahk
+; Menu, Tray, Add
+; #Include modules\joystickSettings.ahk
 Menu, Tray, Add
 #Include services\shortcutsLikeMac.ahk
 Menu, Tray, Add

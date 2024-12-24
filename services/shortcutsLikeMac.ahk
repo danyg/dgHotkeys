@@ -118,6 +118,14 @@ mac_CmdDelete() {
   Send ^{Del}
 }
 
+moveWindowLeftMonitor() {
+	Send #+{Left}
+}
+
+moveWindowRightMonitor() {
+	Send #+{Right}
+}
+
 ; Enable disable logic
 
 MacHotKeys := []
@@ -146,12 +154,12 @@ defineMacHotKeys() {
 
 	; following section remaps alt-arrow and command-arrow
 	; keys to mimic OSX behaviour
-	addMacHotKey("!Up",       Func("mac_CmdUp").bind())
-	addMacHotKey("!Down",     Func("mac_CmdDown").bind())
+	; addMacHotKey("!Up",       Func("mac_CmdUp").bind())
+	; addMacHotKey("!Down",     Func("mac_CmdDown").bind())
 	addMacHotKey("!Left",     Func("mac_CmdLeft").bind())
 	addMacHotKey("!Right",    Func("mac_CmdRight").bind())
-	addMacHotKey("!+Up",      Func("mac_CmdShiftUp").bind())
-	addMacHotKey("!+Down",    Func("mac_CmdShiftDown").bind())
+	; addMacHotKey("!+Up",      Func("mac_CmdShiftUp").bind())
+	; addMacHotKey("!+Down",    Func("mac_CmdShiftDown").bind())
 	addMacHotKey("!+Left",    Func("mac_CmdShiftLeft").bind())
 	addMacHotKey("!+Right",   Func("mac_CmdShiftRight").bind())
 	addMacHotKey("#Up",       Func("mac_OptionUp").bind())
@@ -164,6 +172,9 @@ defineMacHotKeys() {
 	addMacHotKey("#+Right",   Func("mac_OptionShiftRight").bind())
 	addMacHotKey("#BS",       Func("mac_OptionBackSpace").bind())
 	addMacHotKey("Alt & Del", Func("mac_CmdDelete").bind())
+
+	addMacHotKey("^#!Left",     Func("moveWindowLeftMonitor").bind())
+	addMacHotKey("^#!Right",     Func("moveWindowRightMonitor").bind())
 }
 
 disableMacHotKeys() {
@@ -199,6 +210,6 @@ toggleMacKeys() {
 }
 
 ; Start module
-addTrayLabelItem("Mac shortcuts")
+addTrayLabelItem("Mac shortcuts v24.10.11a")
 addHotkey("#Esc", "Toggle Mac HotKeys", Func("toggleMacKeys").bind(), false)
 defineMacHotKeys()
